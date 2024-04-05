@@ -1,21 +1,12 @@
-import OptionsItem from '../OptionsItem/OptionsItem';
-
-const Options = () => {
+import oc from './Options.module.css';
+const Options = ({ updateFeedback, totalFeedback, resetFeedback }) => {
   return (
-    <ul>
-      <li>
-        <OptionsItem />
-      </li>
-      <li>
-        <OptionsItem />
-      </li>
-      <li>
-        <OptionsItem />
-      </li>
-      <li>
-        <OptionsItem />
-      </li>
-    </ul>
+    <div className={oc.options}>
+      <button onClick={() => updateFeedback('good')}>Good</button>
+      <button onClick={() => updateFeedback('neutral')}>Neutral</button>
+      <button onClick={() => updateFeedback('bad')}>Bad</button>
+      {totalFeedback !== 0 && <button onClick={resetFeedback}>Reset</button>}
+    </div>
   );
 };
 

@@ -1,0 +1,6 @@
+.options {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  font-weight: 500;
+}
