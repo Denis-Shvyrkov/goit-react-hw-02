@@ -1,6 +1,7 @@
 import Description from './Description/Descriptions';
 import Feedback from './Feedback/Feedback';
 import Options from './Options/Options';
+import Notification from './Notification/Notification';
 import { useState, useEffect } from 'react';
 import ac from './App.module.css';
 
@@ -18,11 +19,13 @@ const getInitialFeedback = () => {
 function App() {
   const [feedback, setFeedback] = useState(getInitialFeedback);
 
+  const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
+
+  const getAvarageFeedback = Math.round(((feedback.good + feedback.neutral) / totalFeedback) * 100);
+
   const updateFeedback = feedbackType => {
     setFeedback({ ...feedback, [feedbackType]: feedback[feedbackType] + 1 });
   };
-
-  const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
 
   const resetFeedback = () => {
     setFeedback(initialFeedback);
@@ -41,9 +44,13 @@ function App() {
         resetFeedback={resetFeedback}
       />
       {totalFeedback !== 0 ? (
-        <Feedback feedback={feedback} totalFeedback={totalFeedback} />
+        <Feedback
+          feedback={feedback}
+          totalFeedback={totalFeedback}
+          getAvarageFeedback={getAvarageFeedback}
+        />
       ) : (
-        <p>No feedback yet</p>
+        <Notification />
       )}
     </div>
   );
